@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, Button, Alert } from "react-native";
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentVerse } from '../store/slices/bibleSlice';
 
-const BibleInput = ({ onSubmit }) => {
+const BibleInput = () => {
   const [book, setBook] = useState("");
   const [chapter, setChapter] = useState("");
   const [startVerse, setStartVerse] = useState("");
   const [endVerse, setEndVerse] = useState("");
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
     // Validação básica
@@ -24,13 +27,14 @@ const BibleInput = ({ onSubmit }) => {
       return;
     }
 
-    // Chama a função de callback passada como prop
-    onSubmit({
+    const verseData = {
       book: book.trim(),
       chapter: parseInt(chapter),
       startVerse: parseInt(startVerse),
       endVerse: parseInt(endVerse),
-    });
+    };
+
+    dispatch(setCurrentVerse(verseData));
   };
 
   return (
