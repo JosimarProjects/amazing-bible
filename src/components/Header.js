@@ -6,15 +6,14 @@ export default function Header() {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
         <Text style={styles.title}>Amazing Bible</Text>
-      </View>
-   
+      </View>   
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   safeArea: {
-    backgroundColor: "coral",
+    backgroundColor: "blue",
   },
   header: {
     height: 80,

@@ -12,15 +12,15 @@ const handleBibleSubmit = (data) => {
   console.log(data);
 };
 
-function App() {
+const App = () => {
   return (
     <Provider store={store}>
-      <SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }}>
         <Header />
         <BibleInput onSubmit={handleBibleSubmit} />
       </SafeAreaView>
     </Provider>
   );
-}
+};
 
 export default App;

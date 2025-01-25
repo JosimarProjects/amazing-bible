@@ -1,8 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import bibleReducer from './slices/bibleSlice';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     bible: bibleReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
+
+export { store };
