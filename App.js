@@ -1,24 +1,22 @@
-import React from 'react';
-import { Text, View, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
-import Header from './src/components/Header';
-import BibleInput from './src/components/BibleInput';
-
-const handleBibleSubmit = (data) => {
-  // Exemplo de como utilizar os dados enviados
-  Alert.alert("Dados inseridos", JSON.stringify(data));
-  console.log(data);
-};
+import MainScreen from './src/screens/MainScreen';
+import { loadFavorites } from './src/store/persistMiddleware';
+import { addFavorite } from './src/store/favoritesSlice';
 
 const App = () => {
+  useEffect(() => {
+    loadFavorites().then(favoritos => {
+      favoritos.forEach(versiculo => {
+        store.dispatch(addFavorite(versiculo));
+      });
+    });
+  }, []);
+
   return (
     <Provider store={store}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <Header />
-        <BibleInput onSubmit={handleBibleSubmit} />
-      </SafeAreaView>
+      <MainScreen />
     </Provider>
   );
 };
